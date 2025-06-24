@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manage Roles</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+
+  <h1>Assign Website Roles</h1>
+
+  <form method="POST" class="custom-button-form">
+    <label>Discord ID:</label>
+    <input type="text" name="discord_id" placeholder="1234567890" required>
+
+    <label>Role:</label>
+<select name="role" required>
+  <option value="admin">Admin</option>
+  <option value="headcoach">Head Coach</option>
+  <option value="coach">Coach</option>
+</select>
+
+    <button type="submit">Assign Role</button>
+  </form>
+
+  <h2>Current User Roles</h2>
+<ul style="background:#8d6126; padding:1rem; border-radius:1rem; color: #8d6126;">
+  {% for user_id, role in user_roles.items() %}
+    <li style="margin-bottom: 0.8rem;">
+      <form method="POST" action="{{ url_for('update_role') }}" style="display:inline;">
+        <strong style="color: white;">
+  {{ user_id }} "{{ user_display.get(user_id, 'Unknown') }}" — 
+  {{ user_roles[user_id]["role"] if user_roles[user_id] is mapping else user_roles[user_id] }}
+</strong>:
+
+        <select name="role">
+          <option value="admin" {% if role == 'admin' %}selected{% endif %}>Admin</option>
+          <option value="headcoach" {% if role == 'headcoach' %}selected{% endif %}>Head Coach</option>
+          <option value="coach" {% if role == 'coach' %}selected{% endif %}>Coach</option>
+        </select>
+        <input type="hidden" name="discord_id" value="{{ user_id }}">
+        <button type="submit">💾 Update</button>
+      </form>
+
+      <form method="POST" action="{{ url_for('delete_role') }}" style="display:inline; margin-left: 1rem;">
+        <input type="hidden" name="discord_id" value="{{ user_id }}">
+        <button type="submit">❌ Remove</button>
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+
+  <div class="nav-links">
+    <a href="/stations">⬅ Back to Stations</a>
+    <a href="/logout">Logout</a>
+  </div>
+
+</body>
+</html>

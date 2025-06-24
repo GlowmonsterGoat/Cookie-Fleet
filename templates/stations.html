@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cookie Fleet</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='cookie.css') }}">
+</head>
+<body>
+  <div class="fixed-bg"></div>
+
+  <header class="fleet-header">
+    <img src="{{ url_for('static', filename='cookie_header.png') }}" alt="Header" class="header-img">
+  </header>
+
+  <!-- Cookie button that toggles tab -->
+  <img src="{{ url_for('static', filename='cookie_button.png') }}"
+       alt="Tab Button"
+       class="cookie-tab-button"
+       onclick="toggleTab()" />
+
+  <div class="station-layout">
+    <main class="station-scroll" id="stationList">
+      {% for station in stations %}
+        <a class="station-card"
+           data-name="{{ station['station_name'].split('-')[0] | lower }}"
+           data-region="{{ station['region'] | upper }}"
+           data-player-count="{{ station['player_count'] }}"
+           href="{{ url_for('station_detail',
+             station_id=station['station_id'],
+             station_name=station['station_name'].split('-')[0],
+             region=station['region'],
+             player_count=station['player_count']) }}">
+          <div class="station-title">{{ station['station_name'].split('-')[0] }}</div>
+          <div class="station-meta">Player Count: {{ station['player_count'] }}</div>
+          <div class="station-meta">Region: {{ station['region'] }}</div>
+        </a>
+      {% endfor %}
+    </main>
+
+    <aside class="station-filter-sidebar">
+      <select id="regionFilter" onchange="applyFilters()">
+        <option value="">All Regions</option>
+        <option value="US-EAST-2">US-East-2</option>
+        <option value="EU-CENTRAL-1">EU-Central-1</option>
+        <option value="AP-SOUTHEAST-2">AP-Southeast-2</option>
+      </select>
+
+      <select id="playerCountSort" onchange="applyFilters()">
+        <option value="asc">Lowest Pop First</option>
+        <option value="desc">Highest Pop First</option>
+      </select>
+    </aside>
+  </div>
+
+  <!-- Cookie tab overlay -->
+<div id="tabOverlay" class="tab-overlay">
+  <div class="tab-content">
+    <h3>Extra Tabs</h3>
+    <ul>
+  {% if session.get('role') == 'admin' %}
+    <li><a href="{{ url_for('admin_fields') }}">🍪 Button Configs</a></li>
+    <li><a href="{{ url_for('manage_roles') }}">🔑 Manage Roles</a></li>
+  {% endif %}
+  {% if session.get('user') %}
+    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+  {% else %}
+    <li><a href="{{ url_for('login') }}">Login</a></li>
+  {% endif %}
+  </ul>
+  </div>
+</div>
+
+  <script>
+    function toggleTab() {
+      document.getElementById("tabOverlay").classList.toggle("open");
+    }
+
+    function applyFilters() {
+      const region = document.getElementById("regionFilter").value.toUpperCase();
+      const sortOrder = document.getElementById("playerCountSort").value;
+      const cards = Array.from(document.querySelectorAll(".station-card"));
+
+      // Filter
+      cards.forEach(card => {
+        const cardRegion = card.dataset.region.toUpperCase();
+        card.style.display = (region === "" || cardRegion === region) ? "block" : "none";
+      });
+
+      // Sort
+      const visibleCards = cards.filter(card => card.style.display !== "none");
+      visibleCards.sort((a, b) => {
+        const aCount = parseInt(a.dataset.playerCount);
+        const bCount = parseInt(b.dataset.playerCount);
+        return sortOrder === "asc" ? aCount - bCount : bCount - aCount;
+      });
+
+      // Re-render
+      const container = document.getElementById("stationList");
+      visibleCards.forEach(card => container.appendChild(card));
+    }
+
+    window.onload = applyFilters;
+  </script>
+</body>
+</html>

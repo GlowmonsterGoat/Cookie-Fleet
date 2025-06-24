@@ -1,0 +1,74 @@
+<!-- templates/station_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ station_name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='cookie_station.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="station-container">
+
+    <!-- Station Info -->
+    <div class="station-info-box">
+      <h1>Station Name: {{ station_name }}</h1>
+      <p>Station ID: {{ station_id }}</p>
+      <p>Region: {{ region }}</p>
+      <p>Player Count: {{ player_count }}</p>
+
+      <div class="back-button-wrap">
+        <a href="{{ url_for('station_list') }}" class="back-button">← Back to Stations</a>
+      </div>
+    </div>
+
+    {% if session.get('role') in ['headcoach', 'admin'] %}
+    <!-- Scraprun Toggle -->
+    <div class="toggle-row">
+      <div class="toggle-box">Scraprun</div>
+
+      <form method="post" action="{{ url_for('set_scraprun', station_id=station_id, action='enable', station_name=station_name, region=region, player_count=player_count) }}">
+        <button class="cookie-button" type="submit">Enable</button>
+      </form>
+
+      <form method="post" action="{{ url_for('set_scraprun', station_id=station_id, action='disable', station_name=station_name, region=region, player_count=player_count) }}">
+        <button class="cookie-button" type="submit">Disable</button>
+      </form>
+    </div>
+
+    <!-- Other Buttons (Custom) -->
+    <div class="config-buttons">
+      {% for key, value in buttons.items() %}
+      <div class="config-row">
+        <div class="cookie-label">{{ value.label }}</div>
+
+        <form method="POST" action="/station/{{ station_id }}/custom/{{ key }}/enable?station_name={{ station_name }}&region={{ region }}&player_count={{ player_count }}">
+          <button type="submit" class="cookie-toggle-btn enable">Enable</button>
+        </form>
+
+        <form method="POST" action="/station/{{ station_id }}/custom/{{ key }}/disable?station_name={{ station_name }}&region={{ region }}&player_count={{ player_count }}">
+          <button type="submit" class="cookie-toggle-btn disable">Disable</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Example Extra Toggle -->
+    <div class="toggle-row">
+      <div class="toggle-box">Etc.</div>
+      <button class="cookie-button">Enable</button>
+      <button class="cookie-button">Disable</button>
+    </div>
+
+    <!-- Station Config -->
+    <div class="station-config-box">
+      <h2>Station Config</h2>
+      <pre class="config-json">{{ config | tojson(indent=2) }}</pre>
+    </div>
+
+  </div>
+
+</body>
+</html>

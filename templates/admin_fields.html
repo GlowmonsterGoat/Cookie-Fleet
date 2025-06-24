@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Buttons</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+</head>
+<body>
+
+  <h1>Manage Server Buttons</h1>
+  <p>Logged in as: {{ user.username }}</p>
+
+  <!-- Multi Button Form -->
+  <h2>Add a New Button</h2>
+  <form method="POST" action="/admin/fields/multi" class="custom-button-form" id="multi-button-form">
+    <label>Label:</label>
+    <input type="text" name="label" placeholder="Display Name" required>
+
+    <div id="multi-config-container">
+      <div class="multi-config-row">
+        <input type="text" name="key[]" placeholder="Key" required>
+        <input type="text" name="enable[]" placeholder="Enable Value" required>
+        <input type="text" name="disable[]" placeholder="Disable Value">
+      </div>
+    </div>
+
+    <button type="button" onclick="addMultiRow()">+ Add Config</button>
+    <button type="submit">Add Multi Button</button>
+  </form>
+
+  <h2>Buttons</h2>
+  <div class="multi-button-list">
+    {% for key, data in buttons.items() if data.type == "multi" %}
+      <div class="multi-edit-box">
+        <div class="multi-summary">
+          <strong>{{ data.label }}</strong>
+          <button type="button" onclick="toggleEdit('{{ key }}')">Edit</button>
+        </div>
+
+        <form method="POST" action="/admin/fields/multi/update" class="multi-edit-form" id="edit-{{ key }}" style="display:none;">
+          <input type="hidden" name="original_key" value="{{ key }}">
+
+          <label>Label:</label>
+          <input type="text" name="label" value="{{ data.label }}" required>
+
+          <div class="edit-pairs" id="pairs-{{ key }}">
+            {% for pair in data.pairs %}
+              <div class="edit-pair-row">
+                <input type="text" name="key[]" value="{{ pair.key }}" required>
+                <input type="text" name="enable[]" value="{{ pair.enable }}" required>
+                <input type="text" name="disable[]" value="{{ pair.disable or '' }}">
+                <button type="button" onclick="this.parentElement.remove()">❌</button>
+              </div>
+            {% endfor %}
+          </div>
+
+          <button type="button" onclick="addEditRow('{{ key }}')">+ Add Row</button>
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="nav-links">
+    <a href="/stations">⬅ Back to Stations</a>
+    <a href="/logout">Logout</a>
+  </div>
+
+<script>
+  function toggleEdit(key) {
+    const form = document.getElementById("edit-" + key);
+    form.style.display = form.style.display === "none" ? "block" : "none";
+  }
+
+  function addEditRow(key) {
+    const container = document.getElementById("pairs-" + key);
+    const div = document.createElement("div");
+    div.className = "edit-pair-row";
+    div.innerHTML = `
+      <input type="text" name="key[]" placeholder="Key" required>
+      <input type="text" name="enable[]" placeholder="Enable Value" required>
+      <input type="text" name="disable[]" placeholder="Disable Value">
+      <button type="button" onclick="this.parentElement.remove()">❌</button>
+    `;
+    container.appendChild(div);
+  }
+
+  function addMultiRow() {
+    const container = document.getElementById("multi-config-container");
+    const row = document.createElement("div");
+    row.className = "multi-config-row";
+    row.innerHTML = `
+      <input type="text" name="key[]" placeholder="Key" required>
+      <input type="text" name="enable[]" placeholder="Enable Value" required>
+      <input type="text" name="disable[]" placeholder="Disable Value">
+      <button type="button" onclick="this.parentElement.remove()">❌</button>
+    `;
+    container.appendChild(row);
+  }
+</script>
+
+</body>
+</html>

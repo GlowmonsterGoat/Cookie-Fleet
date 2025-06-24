@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+body {
+  background: url("cookie_bg_full.png") no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Fredoka One', sans-serif;
+  color: #fff;
+  max-width: 1000px;
+  margin: auto;
+  padding: 2rem;
+}
+
+h1, h2 {
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.custom-button-form,
+.edit-form,
+.multi-edit-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: #8d6126;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.custom-button-form label,
+.edit-form label,
+.multi-edit-form label {
+  min-width: 100px;
+  font-size: 1rem;
+}
+
+input[type="text"],
+select {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: #fff;
+  color: #8d6126;
+  font-weight: bold;
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #fff;
+  color: #8d6126;
+  border: none;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background-color: #ffe9b6;
+}
+
+.multi-config-row,
+.edit-pair-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.multi-summary {
+  background: #8d6126;
+  padding: 0.8rem 1rem;
+  border-radius: 1.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.nav-links {
+  margin-top: 2rem;
+}
+
+.nav-links a {
+  display: inline-block;
+  margin-right: 1rem;
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  color:#8d6126;
+  font-weight: bold;
+}
+
+.nav-links a:hover {
+  background-color: #ffe0a8;
+}

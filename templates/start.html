@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: url("/static/cookie_bg_full.png") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Fredoka One', sans-serif;
+    }
+    .login-box {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 3rem;
+      border-radius: 2rem;
+      text-align: center;
+    }
+    .login-button {
+      background: #ffcb7c;
+      color: #5c3700;
+      font-size: 2rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 1.5rem;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .login-button:hover {
+      background: #ffc14f;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h1>Welcome to Cookie Fleet</h1>
+    <a class="login-button" href="{{ url_for('login') }}">Login with Discord</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Fredoka One', sans-serif;
+  background: url("station_detail_bg.png") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  overflow-x: hidden;
+}
+
+
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.station-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  gap: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.station-info-box {
+  background: #8d6126;
+  border-radius: 2rem;
+  padding: 2rem 3rem;
+  max-width: 900px;
+  width: 100%;
+  font-size: 1.5rem;
+  line-height: 2.2rem;
+}
+
+h1 {
+  font-size: 2.3rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.control-label {
+  background-color: #a4712e;
+  padding: 0.6rem 1.4rem;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+}
+
+.cookie-button {
+  background-color: #fff;
+  color: #8d6126;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  font-size: 1.4rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.1s ease;
+}
+
+.cookie-button:hover {
+  transform: scale(1.05);
+}
+
+.station-config-box {
+  background: #8d6126;
+  border-radius: 2rem;
+  padding: 2rem 3rem;
+  max-width: 1000px;
+  width: 100%;
+  text-align: left;
+  color: white;
+}
+
+.config-json {
+  font-family: monospace;
+  font-size: 1.1rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.toggle-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.toggle-box {
+  background: #a4712e;
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+  color: white;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.cookie-button {
+  background-color: #fff;
+  color: #8d6126;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  font-size: 1.4rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.1s ease;
+}
+
+.cookie-button:hover {
+  transform: scale(1.05);
+}
+
+.back-button-wrap {
+  margin-top: 3rem;
+}
+
+.back-button {
+  background-color: #fff;
+  color: #8d6126;
+  text-decoration: none;
+  font-size: 1.3rem;
+  padding: 0.7rem 1.8rem;
+  border-radius: 2rem;
+  font-weight: bold;
+  box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.05);
+}
+
+.config-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.config-button {
+  background-color: #ffd08b;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.config-button:hover {
+  background-color: #ffbd66;
+}
+
+.config-button.enable {
+  background-color: #b5eab5;
+}
+
+.config-button.disable {
+  background-color: #f6b0b0;
+}
+
+.config-toggle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  border: 2px solid #d6a96b;
+  border-radius: 1.5rem;
+  background-color: #fff6e0;
+}
+
+.config-label {
+  font-weight: bold;
+  min-width: 140px;
+}
+
+.config-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.cookie-label {
+  background-color: #a56b2f;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-family: 'Fredoka One', sans-serif;
+}
+
+.cookie-toggle-btn {
+  background-color: white;
+  color: #4b2e00;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cookie-toggle-btn:hover {
+  background-color: #ffe6c7;
+}
