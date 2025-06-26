@@ -1,7 +1,10 @@
 {
   "1074409595021303979": {
     "role": "admin",
-    "username": "glowmonster"
+    "username": "glowmonster",
+    "metaname": "Glowmonster_Goat",
+    "player_id": "7205623192816588",
+    "yellow_name": false
   },
   "1255244208349118549": {
     "role": "headcoach",

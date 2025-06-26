@@ -1,0 +1,100 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  color: white;
+}
+
+.fixed-bg {
+  background: url("/static/cookie_bg_full.png") no-repeat center center fixed;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+.container {
+  max-width: 700px;
+  margin: 3rem auto;
+  text-align: center;
+  padding: 1rem 2rem;
+}
+
+h1 {
+  font-size: 3.2rem;
+  margin-bottom: 0.2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.username {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 2rem;
+  border-radius: 20px;
+  margin-top: 1rem;
+}
+
+.card h3 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.status {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.status.green {
+  color: #00ff6e;
+}
+
+.status.red {
+  color: #ff5f5f;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn.enable {
+  background: #4caf50;
+  color: white;
+}
+
+.btn.disable {
+  background: #f44336;
+  color: white;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 2.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: underline;
+}

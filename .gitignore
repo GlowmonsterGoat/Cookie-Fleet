@@ -1,0 +1,12 @@
+__pycache__/
+.env
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+user_roles.json
+instance/
+venv/
+.env.*
+.DS_Store

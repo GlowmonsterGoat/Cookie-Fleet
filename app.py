@@ -10,13 +10,14 @@ import json
 load_dotenv()
 
 # Config
-API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlfaWQiOiI0N2Y3NDFjNy0yZWVkLTRlNDItYWYwZS01NjIxMzdiMTk1MzgiLCJrZXlfdHlwZSI6InNlcnZpY2UiLCJvd25lcl9pZCI6IjcyMDU2MjMxOTI4MTY1ODgiLCJjcmVhdGVkX2F0IjoiMjAyNS0wNi0wNCAwMDowNzo1Ny4xMzI2NzIifQ.jIIoTbpPOvfIthNXiw7HL7GLnbKn1eCIlef085T_Rzo"
+API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJrZXlfaWQiOiIyNWRhNWQ2Ny1mYmZjLTQ4NGMtOTM4My1iMmY1MjE3OWJkMDkiLCJrZXlfdHlwZSI6InNlcnZpY2UiLCJvd25lcl9pZCI6IjcyMDU2MjMxOTI4MTY1ODgiLCJjcmVhdGVkX2F0IjoiMjAyNS0wNi0yNiAxNToyNTozNS41MTA1MDAifQ.A0wy3SNHgEbdmF1IzEPlNJMNoRKewP2PEWtg_4QIuKQ"
 FLEET_ID = "e696ee24-e6fb-45ce-a6bf-e225d15ca9b9"
 DISCORD_CLIENT_ID = os.getenv('DISCORD_CLIENT_ID')
 DISCORD_CLIENT_SECRET = os.getenv('DISCORD_CLIENT_SECRET')
 DISCORD_REDIRECT_URI = os.getenv('DISCORD_REDIRECT_URI')
 DISCORD_API_BASE_URL = 'https://discord.com/api'
 BUTTONS_FILE = "custom_buttons.json"
+YELLOW_ROLE_ID = "59927820-d206-427d-8fd6-628fed3a298d"
 
 # App setup
 app = Flask(__name__)
@@ -37,20 +38,13 @@ def require_role(*allowed_roles):
 def parse_value(value):
     if isinstance(value, bool):
         return value
-    if isinstance(value, (int, float)):
-        return value
-    if not isinstance(value, str):
-        return value
-    if value.lower() == "true":
-        return True
-    if value.lower() == "false":
-        return False
-    try:
-        if "." in value:
-            return float(value)
-        return int(value)
-    except ValueError:
-        return value
+    if isinstance(value, str):
+        val = value.strip().lower()
+        if val == "true":
+            return True
+        if val == "false":
+            return False
+    return str(value)
 
 @app.route("/")
 def home():
@@ -316,11 +310,9 @@ def set_custom_config(station_id, key, action):
     if button_data.get("type") == "multi":
         for pair in button_data.get("pairs", []):
             value = pair.get("enable") if action == "enable" else pair.get("disable")
-            if value is None:
-                continue
-            value = parse_value(value)
-            piece = build_nested_config(pair["key"], value)
-            payload = merge_dicts(payload, piece)
+            if value is not None:
+                parsed = parse_value(value)
+                payload[pair["key"]] = parsed
     else:
         raw_value = button_data.get("enable_value") if action == "enable" else button_data.get("disable_value")
         if raw_value is not None:
@@ -545,6 +537,84 @@ def update_role():
 
     flash("Role updated!", "success")
     return redirect(url_for('manage_roles'))
+
+@app.route('/admin/personal', methods=["GET", "POST"])
+@require_role("headcoach", "admin")
+def personal_settings():
+    user_id = str(session.get("discord_id"))
+
+    try:
+        with open("user_roles.json", "r") as f:
+            roles = json.load(f)
+    except:
+        roles = {}
+
+    user_entry = roles.get(user_id, {})
+    metaname = user_entry.get("metaname", "Unknown")
+    yellow_name_enabled = user_entry.get("yellow_name", False)
+
+    if request.method == "POST":
+        action = request.form.get("action")
+        if action == "enable":
+            roles[user_id]["yellow_name"] = True
+        elif action == "disable":
+            roles[user_id]["yellow_name"] = False
+
+        with open("user_roles.json", "w") as f:
+            json.dump(roles, f, indent=2)
+
+        return redirect(url_for("personal_settings"))
+
+    return render_template(
+        "personal.html",
+        metaname=metaname,
+        yellow_name_enabled=yellow_name_enabled
+    )
+
+@app.route("/admin/personal/toggle_yellow_name", methods=["POST"])
+@require_role("headcoach", "admin")
+def toggle_yellow_name():
+    user_id = str(session.get("discord_id"))
+    action = request.form.get("action")
+
+    try:
+        with open("user_roles.json", "r") as f:
+            data = json.load(f)
+    except:
+        data = {}
+
+    if user_id not in data:
+        return redirect(url_for("personal_settings"))
+
+    if isinstance(data[user_id], dict):
+        player_id = data[user_id].get("player_id")
+        if action == "enable":
+            data[user_id]["yellow_name"] = True
+            if player_id:
+                give_yellow_role(player_id)
+        elif action == "disable":
+            data[user_id]["yellow_name"] = False
+            if player_id:
+                remove_yellow_role(player_id)
+
+    with open("user_roles.json", "w") as f:
+        json.dump(data, f, indent=2)
+
+    return redirect(url_for("personal_settings"))
+
+from A2ApiLib import UpdateUserRole
+
+YELLOW_ROLE_ID = "59927820-d206-427d-8fd6-628fed3a298d"
+
+def give_yellow_role(player_id):
+    result = UpdateUserRole(API_KEY, FLEET_ID, player_id, YELLOW_ROLE_ID, Give=True)
+    print(f"🟡 Gave Yellow Role: {result}")
+    return result
+
+def remove_yellow_role(player_id):
+    result = UpdateUserRole(API_KEY, FLEET_ID, player_id, YELLOW_ROLE_ID, Give=False)
+    print(f"🟡 Removed Yellow Role: {result}")
+    return result
 
 if __name__ == "__main__":
     import os

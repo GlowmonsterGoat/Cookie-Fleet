@@ -57,9 +57,10 @@
   <div class="tab-content">
     <h3>Extra Tabs</h3>
     <ul>
-  {% if session.get('role') == 'admin' %}
+  {% if session.get('role') == 'admin' or session.get('role') == 'headcoach' %}
     <li><a href="{{ url_for('admin_fields') }}">🍪 Button Configs</a></li>
     <li><a href="{{ url_for('manage_roles') }}">🔑 Manage Roles</a></li>
+    <li><a href="{{ url_for('personal_settings') }}">👤 Personal</a></li>
   {% endif %}
   {% if session.get('user') %}
     <li><a href="{{ url_for('logout') }}">Logout</a></li>

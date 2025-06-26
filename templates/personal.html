@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Personal Settings</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='personal.css') }}">
+</head>
+<body>
+  <div class="fixed-bg"></div>
+
+  <div class="container">
+    <h1>Personal Settings</h1>
+    <h2>Meta Username:</h2>
+    <p class="username">{{ meta_username }}</p>
+
+    <div class="card">
+      <h3>Yellow Name</h3>
+      <p class="status {{ 'green' if yellow_name_enabled else 'red' }}">
+        Status: {{ 'ENABLED' if yellow_name_enabled else 'DISABLED' }}
+      </p>
+      <div class="button-row">
+        <form method="POST" action="{{ url_for('toggle_yellow_name') }}">
+          <input type="hidden" name="action" value="enable">
+          <button class="btn enable" type="submit">Enable</button>
+        </form>
+        <form method="POST" action="{{ url_for('toggle_yellow_name') }}">
+          <input type="hidden" name="action" value="disable">
+          <button class="btn disable" type="submit">Disable</button>
+        </form>
+      </div>
+    </div>
+
+    <a href="{{ url_for('station_list') }}" class="back">← Back to Stations</a>
+  </div>
+</body>
+</html>
