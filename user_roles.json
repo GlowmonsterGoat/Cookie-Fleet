@@ -1,14 +1,100 @@
 {
+  "761311675717648427": {
+    "role": "headcoach",
+    "username": "Fairy",
+    "metaname": "Fairy-",
+    "player_id": "4086705431367530"
+  },
+  "649791725291831296": {
+    "role": "headcoach",
+    "username": "Domie",
+    "metaname": "DomieIG",
+    "player_id": "8134780013309495"
+  },
+  "666499290616692736": {
+    "role": "headcoach",
+    "username": "Altived",
+    "metaname": "altivved",
+    "player_id": "8034819379933155"
+  },
+  "1353486136156356692": {
+    "role": "headcoach",
+    "username": "Batistia",
+    "metaname": "Batista13505",
+    "player_id": "5479700262157982"
+  },
+  "1255244208349118549": {
+    "role": "headcoach",
+    "username": "Axolotl",
+    "metaname": "Axolotldash",
+    "player_id": "4471142236326148"
+  },
+  "768465337271975977": {
+    "role": "headcoach",
+    "username": "Andre",
+    "metaname": "Andre11230",
+    "player_id": "4121088017939197"
+  },
+  "836550664163164200": {
+    "role": "headcoach",
+    "username": "Scribbl",
+    "metaname": "Scr1bbl",
+    "player_id": "4446128932104294"
+  },
+  "238929607183695874": {
+    "role": "headcoach",
+    "username": "Flynn",
+    "metaname": "Flynnyr",
+    "player_id": "4881674568551484"
+  },
+
+
+
+
+  
   "1074409595021303979": {
     "role": "admin",
-    "username": "glowmonster",
+    "username": "Glowmonster",
     "metaname": "Glowmonster_Goat",
     "player_id": "7205623192816588",
     "yellow_name": false
   },
-  "1255244208349118549": {
-    "role": "headcoach",
-    "username": "axo",
-    "metaname": "axo"
+
+  "885981476062117949": {
+    "role": "admin",
+    "username": "Trey",
+    "metaname": "Trey_st",
+    "player_id": "8597129673661619"
+  },
+  
+  "740137632054378588": {
+    "role": "admin",
+    "username": "Shredda",
+    "metaname": "Shredda-",
+    "player_id": "4780304455348356"
+  },
+
+  "1052280044476715089": {
+    "role": "admin",
+    "username": "Nerdie",
+    "metaname": "nerdie.com",
+    "player_id": "4901227923240923"
+  },
+
+  "859727212354076673": {
+    "role": "admin",
+    "username": "Ratson",
+    "metaname": "Ratson77",
+    "player_id": "4403512816438637"
+  },
+  
+  "1084063456887582831": {
+    "role": "admin",
+    "username": "Grape",
+    "metaname": "GrapeUK",
+    "player_id": "5738253936201315"
   }
 }
+  
+
+
