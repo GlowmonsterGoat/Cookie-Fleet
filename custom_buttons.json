@@ -1,0 +1,62 @@
+{
+  "multi_wa_da_flip": {
+    "label": "Wa Da Flip",
+    "type": "multi",
+    "pairs": [
+      {
+        "key": "Scraprun",
+        "enable": "True",
+        "disable": "False"
+      },
+      {
+        "key": "FanLighs",
+        "enable": "True",
+        "disable": "False"
+      }
+    ]
+  },
+  "multi_a": {
+    "label": "a",
+    "type": "multi",
+    "pairs": [
+      {
+        "key": "b",
+        "enable": "c",
+        "disable": "d"
+      }
+    ]
+  },
+  "multi_letter_and_number_test": {
+    "label": "Letter and number test",
+    "type": "multi",
+    "pairs": [
+      {
+        "key": "L",
+        "enable": "1",
+        "disable": "2"
+      }
+    ]
+  },
+  "multi_numbers": {
+    "label": "Numbers",
+    "type": "multi",
+    "pairs": [
+      {
+        "key": "Key1.0",
+        "enable": "1",
+        "disable": "5"
+      }
+    ]
+  },
+  "multi_bunker_3v2": {
+    "label": "Bunker 3v2",
+    "type": "multi",
+    "pairs": [
+      {
+        "key": "loadedgamemodes.tkb_bunker.modulestate.dashboardconfigoverrides.ticketmanagersettings.maxteamsizes.0",
+        "enable": "2",
+        "disable": "3"
+      }
+    ]
+  }
+}
