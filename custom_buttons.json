@@ -1,15 +1,4 @@
 {
-  "multi_a": {
-    "label": "a",
-    "type": "multi",
-    "pairs": [
-      {
-        "key": "b",
-        "enable": "c",
-        "disable": "d"
-      }
-    ]
-  },
   "multi_letter_and_number_test": {
     "label": "Letter and number test",
     "type": "multi",
