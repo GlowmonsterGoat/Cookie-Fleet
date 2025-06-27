@@ -34,7 +34,13 @@
         <div class="multi-summary">
           <strong>{{ data.label }}</strong>
           <button type="button" onclick="toggleEdit('{{ key }}')">Edit</button>
+
+          <form method="POST" action="{{ url_for('delete_button') }}" style="display:inline;">
+            <input type="hidden" name="delete_key" value="{{ key }}">
+            <button type="submit" onclick="return confirm('Delete this button?')">🗑️</button>
+          </form>
         </div>
+
 
         <form method="POST" action="/admin/fields/multi/update" class="multi-edit-form" id="edit-{{ key }}" style="display:none;">
           <input type="hidden" name="original_key" value="{{ key }}">
