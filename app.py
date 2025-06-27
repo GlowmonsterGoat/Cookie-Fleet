@@ -602,21 +602,6 @@ def toggle_yellow_name():
 
     return redirect(url_for("personal_settings"))
 
-@app.route('/admin/fields/delete', methods=["POST"])
-@require_role("admin")
-def delete_button():
-    if 'user' not in session:
-        return redirect(url_for('login'))
-
-    key = request.form.get("delete_key")
-    buttons = load_buttons()
-
-    if key in buttons:
-        del buttons[key]
-        save_buttons(buttons)
-
-    return redirect(url_for('admin_fields'))
-
 from A2ApiLib import UpdateUserRole
 
 YELLOW_ROLE_ID = "59927820-d206-427d-8fd6-628fed3a298d"

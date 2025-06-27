@@ -100,3 +100,17 @@ button:hover {
 .nav-links a:hover {
   background-color: #ffe0a8;
 }
+
+.multi-summary form {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.multi-summary button[type="submit"] {
+  background: #ff5555;
+  color: white;
+  border: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
