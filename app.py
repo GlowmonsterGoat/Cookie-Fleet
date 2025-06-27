@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from A2ApiLib import CollectStations, ConfigReadStation, ConfigSendStation
+from A2ApiLib import CollectStations, ConfigReadStation, ConfigSendStation, UpdateUserRole
 from dotenv import load_dotenv
 from functools import wraps
 import requests
@@ -602,9 +602,51 @@ def toggle_yellow_name():
 
     return redirect(url_for("personal_settings"))
 
-from A2ApiLib import UpdateUserRole
+def push_buttons_to_github():
+    import base64
 
-YELLOW_ROLE_ID = "59927820-d206-427d-8fd6-628fed3a298d"
+    token = os.getenv("GITHUB_TOKEN")
+    repo = "GlowmonsterGoat/Cookie-Fleet"
+    file_path = "custom_buttons.json"
+    branch = "main"
+
+    if not token:
+        print("❌ No GitHub token set")
+        return
+
+    # Read local file
+    with open(file_path, "r") as f:
+        content = f.read()
+
+    # Encode in base64 for GitHub
+    b64_content = base64.b64encode(content.encode()).decode()
+
+    # Get SHA of current file in GitHub
+    url = f"https://api.github.com/repos/{repo}/contents/{file_path}"
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github.v3+json"
+    }
+    r = requests.get(url, headers=headers)
+    sha = r.json().get("sha")
+
+    # Commit new file
+    commit_data = {
+        "message": "🔄 Auto-update button config",
+        "content": b64_content,
+        "branch": branch,
+        "sha": sha
+    }
+
+    r = requests.put(url, headers=headers, json=commit_data)
+    print("📦 GitHub push status:", r.status_code, r.text)
+
+def save_buttons(buttons):
+    with open(BUTTONS_FILE, "w") as f:
+        json.dump(buttons, f, indent=2)
+    
+    # Push to GitHub
+    push_buttons_to_github()
 
 def give_yellow_role(player_id):
     result = UpdateUserRole(API_KEY, FLEET_ID, player_id, YELLOW_ROLE_ID, Give=True)
