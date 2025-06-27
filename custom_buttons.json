@@ -1,1 +1,13 @@
-{}
+{
+  "multi_private_server_": {
+    "label": "Private Server ",
+    "type": "multi",
+    "pairs": [
+      {
+        "key": "num_reserved_slots",
+        "enable": "75",
+        "disable": "3"
+      }
+    ]
+  }
+}
