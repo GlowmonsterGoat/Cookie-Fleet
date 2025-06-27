@@ -1,13 +1,1 @@
-{
-  "multi_bunker_3v2": {
-    "label": "Bunker 3v2",
-    "type": "multi",
-    "pairs": [
-      {
-        "key": "loadedgamemodes.tkb_bunker.modulestate.dashboardconfigoverrides.ticketmanagersettings.maxteamsizes.0",
-        "enable": "2",
-        "disable": "3"
-      }
-    ]
-  }
-}
+{}
