@@ -9,5 +9,26 @@
         "disable": "3"
       }
     ]
+  },
+  "multi_cvd": {
+    "label": "CVD",
+    "type": "multi",
+    "pairs": [
+      {
+        "key": "loadedgamemodes.tkb_prime.modulestate.dashboardconfigoverrides.bkicklosingteam",
+        "enable": "true",
+        "disable": "false"
+      },
+      {
+        "key": "loadedgamemodes.tkb_prime.modulestate.dashboardconfigoverrides.buseteam0whitelist",
+        "enable": "true",
+        "disable": "false"
+      },
+      {
+        "key": "loadedgamemodes.tkb_prime.modulestate.dashboardconfigoverrides.team0whitelist",
+        "enable": "Vader3132645,XTM701,Rubentje,PL00T2,ll.bread.ll,R.J.W,Oizys,Tonygo28,MrDawnz,Ymgy_F3l1x,Dark.comm,n0t.t0p,Buzzn,miamifr,Plutusvr,deppp,Sweet_Tooth77,jdgishere,Batista13505,Leoomm,cemogila,OO1,Ryno_K,ToastForFun,PESKYYY,XRockyvrX,PlagueDoctor13,skitttt,Z_Volk,LFC.Tree,HUN7ERB,zoij,githyankee,duck.45vr,Axolotldash,ChaceAttack,DomieIG,Flynnyr,LOLeoReal,RUILO,RTB7,coopmerr,LopezDestroyer99,Mr.GreenFlame,Bellyflopss-,ThatGreenPigeon,twixzy_Dust,Btoza,Candice2215,dragon58294,GoobIin,MikeinSPACE2008,CJTheCaster,Jilkz,D1st0rt3d1,tygi,EBspark,FunnyManCyber,sewey00,Fairy-,deff.ngl,1Toast-,Flying_Dash,Kiwi-_,Ketzy,Glowmonster_Goat,MrpDonuts,Geap_26,Saibl,0RC4,Andre11230,Danger_Vr23,Visionise,Trey_st,Scr1bbl,sexyaura,NXBORE,KloxinSkullz,711Destroyer,5TR34M3R,Duckpp,QuantumsReality,nerdie.com,zenosrq",
+        "disable": "Null"
+      }
+    ]
   }
 }
