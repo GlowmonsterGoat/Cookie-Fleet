@@ -1,20 +1,4 @@
 {
-  "multi_wa_da_flip": {
-    "label": "Wa Da Flip",
-    "type": "multi",
-    "pairs": [
-      {
-        "key": "Scraprun",
-        "enable": "True",
-        "disable": "False"
-      },
-      {
-        "key": "FanLighs",
-        "enable": "True",
-        "disable": "False"
-      }
-    ]
-  },
   "multi_a": {
     "label": "a",
     "type": "multi",
